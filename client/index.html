@@ -28,9 +28,11 @@
   <script type="text/javascript" src="/js/canvas.js"></script>
   <script type="text/javascript" src="/js/colorPicker.js"></script>
   <script type="text/javascript" src="/js/brushPicker.js"></script>
-  <script type="text/javascript" src="/js/eraser.js"></script>
-  <script type="text/javascript" src="/js/script.js"></script> 
-  <script type="text/javascript" src="/js/chat.js"></script>
+  <script type="text/javascript" src="/js/eraser.js"></script> 
+  <script type="text/javascript" src="/js/people.js"></script>
+  <script type="text/javascript" src="/js/modal.js"></script>
+  <script type="text/javascript" src="/js/save.js"></script>
+  <script type="text/javascript" src="/js/script.js"></script>
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -43,15 +45,14 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
-          <h4 class="modal-title">Create a Username</h4>
+          <h4 class="modal-title">What's your name?</h4>
         </div>
         <div class="modal-body">
-          <input type="text" class="form-control" placeholder="Enter name..." id="input-name">
+          <input type="text" class="form-control" name="name" autofocus="true">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" id="no-name" data-dismiss="modal">Be Anonymous</button>
-          <button type="button" class="btn btn-primary" id="name-btn" data-dismiss="modal">Save Name</button>
+          <button type="button" class="btn btn-sm btn-default" id="no-name" data-dismiss="modal" tabindex="1">Be Anonymous</button>
+          <button type="button" class="btn btn-primary" id="name-btn" data-dismiss="modal" tabindex="1">Save Name</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -61,39 +62,62 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <a class="navbar-brand"><span class="light-text">Whiteboard</span> Draw!</a>
+      <a class="navbar-brand">Whiteboard</a>
+      <ul id="pplOnline">
+        <!--online users here-->
+      </ul>
+      <!--<ul id="Online">
+        <li>Roz</li>
+        <li>Cheryl</li>
+        <li>Cindy</li>
+        <li>Artie</li>
+        <li>Jordyn</li>
+        <li>Jeanette</li>
+        <li>Adam</li>
+        <li>Lizzie</li>
+        <li>Brandon</li>
+        <li>Libby</li>
+        <li>Charity</li>
+        <li>Candace</li>
+        <li>Rose</li>
+        <li>Sam</li>
+        <li>Nick</li>
+      </ul>-->
     </div>
   </nav>
   <div class="container-fluid">
     <div class="row">
-      
-      <div class="col-fixed-8">
-        <div class="well well-sm picker">
-          <div  id="color-picker"></div>
-          <span id="erase-button" class="glyphicon glyphicon-erase" aria-hidden="true"></span>
-          <div  id="brush-picker"></div>
-          <div  id="state-buttons" class="pull-right">
-            <div class="btn-group" role="group" aria-label="">
-              <button class="btn btn-info btn-sm" id="redo_btn">Redo</button>
-              <button class="btn btn-danger btn-sm" id="undo_btn">Undo</button>
-            </div>
-            <button class="btn btn-default btn-sm" id="clear_btn">Reset</button>
+      <!-- picker -->
+      <div class="well-sm picker">
+        <div class="popout">
+          <button class="btn popout-button"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></button>
+          <div id="color-picker" class="popout-content click-to-hide well well-sm">
+            <!-- color options here -->
           </div>
         </div>
-        <div id="draw-box" class="panel panel-default">
+        <button id="erase-button" class="glyphicon glyphicon-erase btn"></button>
+        <div id="brush-picker">
+          <!-- brush options here -->
+        </div>
+        <div id="state-buttons">
+          <button class="btn btn-danger btn-sm" id="undo_btn">Undo</button>
+          <button class="btn btn-info btn-sm" id="redo_btn">Redo</button>
+        </div>
+        <button class="btn btn-default btn-sm" id="reset_btn">Reset</button>
+        <div class="popout">
+          <button id="save-button" class="btn btn-success btn-sm">Save</button>
+          <button id="download-button" class="btn popout-button">
+            <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+            <span class="label label-danger label-xs">0</span>
+          </button>
+          <div id="saved-bin" class="popout-content well well-sm">
+            <!-- thumbnails of saved whiteboards here -->
+          </div>
+        </div>
+      </div><!--/picker-->
+      <div id="draw-box" class="panel panel-default">
           <!-- Canvas goes here -->
-        </div>
       </div>
-
-      <div class="col-fixed-4 chat-box">
-        <div id="chat-box" class="well">
-          <div id="messages" class="panel panel-default">
-            <!-- Chat messages append here -->
-          </div>
-          <input type="text" id="message" placeholder="Type your message..." class="form-control">
-          <button class="btn btn-success pull-right" id="send_btn">Send</button>
-        </div>
-
     </div>
   </div>
 </body>

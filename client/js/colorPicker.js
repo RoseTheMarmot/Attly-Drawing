@@ -1,5 +1,5 @@
 var ColorPicker = function(container_selector, initColor, drawingApp){
-  var colors = ['#000000', '#FFFFFF', '#FF00BB', '#C2255E', '#752070', '#CC00FF', '#C567F5', '#7A19D4', '#3800D4', '#2015ED', '#3B76FF', '#3B9DFF', '#95C5F5', '#36608A', '#2FBAD6', '#0E444F', '#0E4F31', '#37CC87', '#43CC37', '#14F000', '#BDEB91', '#9FA896', '#FFF89C', '#F7E80A', '#968E11', '#966C11', '#4F3A0B', '#453C2A', '#A15805', '#FC8803', '#F7BA7C', '#F26118', '#B04109', '#781708', '#FCACAC', '#FF4000'];
+  var colors = ['#000000', '#FFFFFF', '#333333', '#02C0DC', '#04447A', '#AD1D17', '#46B74F', '#CCCCCC', '#888888', '#FF0000', '#0000FF'];
   var boxes = colors.length;
   
   for(var i = 0; i < boxes; i++){
@@ -10,14 +10,22 @@ var ColorPicker = function(container_selector, initColor, drawingApp){
     } 
   }
 
+  var currentColor = initColor;
+
   this.changeColor = function(current){
-  	var newColor = current.css("background-color");
+  	var newColor = current.attr("color");
     drawingApp.ctx.strokeStyle = newColor;
     current.addClass('selected').siblings().removeClass('selected');
+    current.closest('.popout').find('.popout-button').css('background-color', newColor);
+    currentColor = newColor;
     return newColor;
   }
 
+  this.currentColor = function(){
+    return currentColor;
+  }
+
   function box(color){
-    return $("<div style='background-color:"+color+";'></div>");
+    return $("<div color='"+color+"' style='background-color:"+color+";'>"+color+"</div>");
   }
 }
