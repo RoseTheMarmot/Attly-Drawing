@@ -1,13 +1,10 @@
 /*
  * manages showing who is online
  */
-
-$(document).ready(function(){
-	
-	var socket = io.connect();
+function People(socket){
 	var pplOnline = $('#pplOnline');
 	var nameModal = $("#name-modal");
-
+	
 	/*
 	 * event listeners
 	 */
@@ -48,5 +45,4 @@ $(document).ready(function(){
 		var randNum = Math.floor(Math.random()*899)+100;
 		return "Anonymous"+randNum;
 	}
-
-});
+}

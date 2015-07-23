@@ -12,18 +12,21 @@ $(document).ready(function($){
   var brushes = {};
   var eraser = {};
   var save = {};
-  var mousedown = false; //true false if the mouse is down while being moved
+  var people;
   var curColor;
   var curBrush;
+  var mousedown = false; //true false if the mouse is down while being moved
 
+  
   $.get('/drawings', function(data){
-      curColor = data.initColor;
-      curBrush = data.initSize;
       canvas = new Canvas('#draw-box', data);
       colors = new ColorPicker('#color-picker', data.initColor, canvas);
       brushes = new BrushPicker('#brush-picker', data.initSize, canvas);
       eraser = new Erase($('#erase-button'), '#ffffff', canvas);
       save = new Save($('#save-button'), $('#download-button .label'), $('#saved-bin'));
+      curColor = data.initColor;
+      curBrush = data.initSize;
+      people = new People(socket); 
     },
     'json'
   );
