@@ -1,21 +1,21 @@
-var BrushPicker = function(container_selector, initSize, drawingApp){
+function BrushPicker(initSize){
   var sizes = [2, 5, 8, 11, 15];
+  var currentBrush = initSize;
+
+  this.container = $('#brush-picker');
   for(var i = 0; i < sizes.length; i++){
     if(sizes[i] == initSize){
-      $(container_selector).append(box(sizes[i]).addClass('selected'));
+      this.container.append(box(sizes[i]).addClass('selected'));
     }else{
-      $(container_selector).append(box(sizes[i]));
+      this.container.append(box(sizes[i]));
     } 
   }
-
-  var currentBrush = initSize;
   
-  this.changeBrush = function(current){
-  	var newBrush = parseInt(current.attr('size'));
-    drawingApp.ctx.lineWidth = newBrush;
-    current.addClass('selected').siblings().removeClass('selected');
+  this.changeBrush = function(newBrush){
+    var new_current = $('[size='+newBrush+']', this.container);
+    new_current.addClass('selected').siblings().removeClass('selected');
     currentBrush = newBrush;
-    return newBrush;
+    return new_current;
   }
 
   this.currentBrush = function(){

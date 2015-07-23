@@ -20,8 +20,8 @@ $(document).ready(function($){
   
   $.get('/drawings', function(data){
       canvas = new Canvas('#draw-box', data);
-      colors = new ColorPicker('#color-picker', data.initColor, canvas);
-      brushes = new BrushPicker('#brush-picker', data.initSize, canvas);
+      colors = new ColorPicker( data.initColor );
+      brushes = new BrushPicker( data.initSize );
       eraser = new Erase($('#erase-button'), '#ffffff', canvas);
       save = new Save($('#save-button'), $('#download-button .label'), $('#saved-bin'));
       curColor = data.initColor;
@@ -37,14 +37,12 @@ $(document).ready(function($){
   $('#color-picker'). //selecting a new color from the color picker
     on('click', '> div', function(){
       $('#erase-button').removeClass('selected');
-      curColor = colors.changeColor($(this));
-      socket.emit("color_change", {color: curColor});
+      socket.emit("color_change", {color: $(this).attr('color') });
       canvas.save();
     });
   $('#brush-picker'). //selecting a new brush size
     on('click', '> div', function(){
-      curBrush = brushes.changeBrush($(this));
-      socket.emit("brush_change", {brush: curBrush});
+      socket.emit("brush_change", {brush: $(this).attr('size')});
       canvas.save();
     });
   $('#erase-button').
@@ -112,11 +110,12 @@ $(document).ready(function($){
   });
   socket.on("color_changed", function(data){
     canvas.ctx.strokeStyle = data.color;
-    colors.changeColor($('#color-picker div[color='+data.color+']'));
+    var new_current = colors.changeColor($('#color-picker div[color='+data.color+']').attr('color'));
+    new_current.closest('.popout').find('.popout-button').css('background-color', data.color);
   });
   socket.on("brush_changed", function(data){ //change brush size
     canvas.ctx.lineWidth = data.brush;
-    brushes.changeBrush($('#brush-picker div[size='+data.brush+']'));
+    brushes.changeBrush($('#brush-picker div[size='+data.brush+']').attr('size'));
   });
   socket.on("reset_canvas", function(){ //clear drawing area
     canvas.reset();
