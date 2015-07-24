@@ -6,6 +6,7 @@ var Canvas = function(container_selector, init){
   this.canvas.id = "canvas_id"
   this.canvas.height = parseInt($('#draw-box').css('height'));;
   this.canvas.width = parseInt($('#draw-box').css('width'));
+  this.canvas.background_color = '#FFFFFF';
 
   //getting drawing context
   this.ctx = this.canvas.getContext('2d');
@@ -17,7 +18,7 @@ var Canvas = function(container_selector, init){
   this.ctx.lineCap = "round";
 
   //setting canvas background to white
-  fill(this, '#FFFFFF');
+  fill(this, this.canvas.background_color);
   
   //set up previous drawings
   setDrawing(this);
@@ -70,7 +71,7 @@ var Canvas = function(container_selector, init){
   }
 
   this.reset = function(){
-    fill(thisCanvas, '#FFFFFF');
+    fill(thisCanvas, thisCanvas.canvas.background_color);
     history[0] = thisCanvas.canvas.toDataURL();
     history.length = 1;
     history_step = 0;

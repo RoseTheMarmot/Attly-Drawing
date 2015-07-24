@@ -11,13 +11,14 @@ function BrushPicker(initSize){
     } 
   }
   
+  //sets the current brush to a new brush
   this.changeBrush = function(newBrush){
     var new_current = $('[size='+newBrush+']', this.container);
     new_current.addClass('selected').siblings().removeClass('selected');
     currentBrush = newBrush;
     return new_current;
   }
-
+  //returns current brush
   this.currentBrush = function(){
     return currentBrush;
   }

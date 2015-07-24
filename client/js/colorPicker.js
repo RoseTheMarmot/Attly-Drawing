@@ -12,24 +12,29 @@ function ColorPicker(initColor){
     } 
   }
 
+  //sets the current color to the new color
   this.changeColor = function(newColor){
     var new_current = $('[color='+newColor+']', this.container);
     new_current.addClass('selected').siblings().removeClass('selected');
     currentColor = newColor;
     return new_current;
   }
+  //returns current color
   this.currentColor = function(){
     return currentColor;
   }
+  //returns list of all colors
   this.colors = function(){
     return colors;
   }
+  //adds a color to the list
   this.addColor = function(hex_color){
     if( typeof(hex_color) === 'string' && hex_color.match(/#[a-fA-F\d]{6}/) ){
       colors.push(hex_color);
     }
     return colors;
   } 
+  //removes a color from the list
   this.removeColor = function(hex_color){
     if( typeof(hex_color) === 'string' && hex_color.match(/#[a-fA-F\d]{6}/) ){
       var to_remove = 0;
