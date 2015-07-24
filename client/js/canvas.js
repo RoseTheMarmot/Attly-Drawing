@@ -4,18 +4,14 @@ var Canvas = function(container_selector, init){
   //initializing the canvas
   this.canvas = document.createElement('canvas');
   this.canvas.id = "canvas_id"
-  this.canvas.height = parseInt($('#draw-box').css('height'));;
-  this.canvas.width = parseInt($('#draw-box').css('width'));
+  //this.canvas.height = parseInt($('#draw-box').css('height'));
+  //this.canvas.width = parseInt($('#draw-box').css('width'));
+  this.canvas.height = 500;
+  this.canvas.width = 1100;
   this.canvas.background_color = '#FFFFFF';
 
   //getting drawing context
   this.ctx = this.canvas.getContext('2d');
-
-  //initializing the drawing brush
-  this.ctx.fillStyle = "solid";
-  this.ctx.strokeStyle = init.initColor;
-  this.ctx.lineWidth = init.initSize;
-  this.ctx.lineCap = "round";
 
   //setting canvas background to white
   fill(this, this.canvas.background_color);
@@ -29,21 +25,6 @@ var Canvas = function(container_selector, init){
   
   //adding the drawing area to the page
   $(container_selector).append(this.canvas);
-
-  //draws lines on the canvas
-  this.draw = function(x,y,type){
-    console.log(type);
-    if(type == "dragstart"){
-      this.ctx.beginPath();
-      this.ctx.moveTo(x,y);
-    }else if(type == "drag"){
-      this.ctx.lineTo(x,y);
-      this.ctx.stroke();
-    }else{ //dragend
-      this.ctx.closePath();
-      push_history();
-    }
-  }
 
   //saves drawing settings
   this.save = function(callback){
@@ -78,7 +59,7 @@ var Canvas = function(container_selector, init){
   }
 
   // saves drawing moves for undo/redo
-  function push_history(){
+  this.push_history = function(){
     history[++history_step] = thisCanvas.canvas.toDataURL();
     history.length = history_step + 1;
   }

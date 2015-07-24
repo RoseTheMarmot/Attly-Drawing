@@ -8,6 +8,8 @@ module.exports = function(server){
 
 	//people
 	var people = {};
+	//brushes
+	var brushes = {};
 	//saved canvases
 	var saved_canvases = {};
 
@@ -28,6 +30,23 @@ module.exports = function(server){
 			}
 		});
 
+		/******* brushes *******/
+		console.log(brushes);
+		io.emit('updated_brushes', {brushes: brushes});
+
+		socket.on("new_brush", function(data){
+			brushes[socket.id] = data.brush;
+			console.log(data.brush);
+			socket.broadcast.emit('added_brush', {brush: data.brush });
+		});
+
+		socket.on("disconnect", function(){
+			if( brushes[socket.id] ){
+				delete brushes[socket.id];
+			}
+			io.emit('removed_brush', {id: socket.id});
+		});
+
 		/****** whiteboards *******/
 		io.emit("saved_canvases", {canvases: saved_canvases});
 		
@@ -46,7 +65,7 @@ module.exports = function(server){
 
 		/****** drawing *******/
 		socket.on("drawing", function(data){
-			socket.broadcast.emit("draw", {x: data.x, y: data.y, type: data.type});
+			socket.broadcast.emit("draw", {x:data.x, y:data.y, type:data.type, id:data.id});
 			if(data.type == "dragstart"){
 				io.emit("person_drawing", {id:data.id});
 			}else if(data.type == "dragend"){
@@ -55,11 +74,11 @@ module.exports = function(server){
 		});
 
 		socket.on("color_change", function(data){
-			io.emit("color_changed", {color: data.color});
+			io.emit("color_changed", {color: data.color, id: data.id });
 		});
 
 		socket.on("brush_change", function(data){
-			io.emit("brush_changed", {brush: data.brush});
+			io.emit("brush_changed", {brush: data.brush, id: data.id });
 		});
 
 		/****** undo/redo/clear *******/
