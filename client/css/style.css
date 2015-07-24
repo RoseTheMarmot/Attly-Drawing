@@ -21,7 +21,8 @@ canvas { cursor: crosshair; }
 .picker > div, .picker > button { margin-bottom: 9px; }
 .picker .selected { outline: 2px solid #fff; box-shadow: 1px 1px 5px #333; }
 
-#draw-box { height: calc(100% - 70px); min-height: 500px; width: calc(100% - 80px); display: inline-block; vertical-align: top; overflow: overlay; }
+#draw-box { /*height: calc(100% - 70px); min-height: 500px; width: calc(100% - 80px);*/ 
+	display: inline-block; vertical-align: top; overflow: overlay; }
 
 #color-picker { }
 	#color-picker > div { width:50px; height:40px; line-height: 40px; display:inline-block; margin: 2px; cursor: pointer; color: #fff; font-size: 10px; text-align: center; }

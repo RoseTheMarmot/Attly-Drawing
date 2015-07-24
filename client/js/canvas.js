@@ -4,8 +4,10 @@ var Canvas = function(container_selector, init){
   //initializing the canvas
   this.canvas = document.createElement('canvas');
   this.canvas.id = "canvas_id"
-  this.canvas.height = parseInt($('#draw-box').css('height'));;
-  this.canvas.width = parseInt($('#draw-box').css('width'));
+  //this.canvas.height = parseInt($('#draw-box').css('height'));
+  //this.canvas.width = parseInt($('#draw-box').css('width'));
+  this.canvas.height = 500;
+  this.canvas.width = 1100;
   this.canvas.background_color = '#FFFFFF';
 
   //getting drawing context
