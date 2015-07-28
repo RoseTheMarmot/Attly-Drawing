@@ -44,11 +44,6 @@ canvas { cursor: crosshair; }
 #download-button { position: relative; }
 #download-button span.label { position: absolute; top: -2px; left: 30px; }
 
-.auth input { margin: 10px 10px 10px 0; max-width: 500px; display: inline-block;}
-.auth label { display: block; }
-.errors img { max-width: 300px; height: auto; }
-input.errors-true { background-color: #FFB0B0; border-color: #FF3B3B; }
-
 @media all and (max-width: 1093px){
 	.chat-box{ width: 640px; }
 	#messages{ height: 200px; }

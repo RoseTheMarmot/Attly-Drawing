@@ -1,0 +1,48 @@
+<% if(!errors){ var errors = "false" } %>
+
+<!DOCTYPE>
+<html lang="en">
+<head>
+	<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Whiteboard</title>
+  <meta name="description" content="">
+  <meta name="author" content="Rose Beede">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Scripts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- external scripts -->
+  <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/login.js"></script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form class="auth" method="post" action="/authenticate">
+          <label>Password:</label>
+          <input class="form-control errors-<%= errors %>" type="password" name="passphrase" autofocus>
+          <input class="btn" type="submit" value="Submit">
+        </form>
+        <div class="errors <%= errors %>"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
