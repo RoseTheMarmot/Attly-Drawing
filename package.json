@@ -33,5 +33,5 @@
     "start": "node server/server.js"
   },
   "private": true,
-  "main": "server/server.js"
+  "main": "server.js"
 }
