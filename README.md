@@ -31,3 +31,9 @@ The eraser is sort of a hack thing. It just changes the brush to white. It's not
 > Save
 
 Saving canvas images for download is different form the actual saving of the canvas. The canvas itself is saved after each brush action to a json file. There is no history in the json file, just the most recent canvas. Clicking save on the UI added an a saved image of the canvas to an array, which can then be downloaded. These are not stored on the back end, so if the sever is restarted they will be lost.
+
+
+The OpenShift `nodejs` cartridge documentation can be found at:
+
+http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+
