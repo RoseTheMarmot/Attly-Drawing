@@ -4,6 +4,7 @@
 
 var fs = require('fs');
 var jsonfile = require('jsonfile');
+var bcrypt = require('bcrypt');
 var valid_ips = [];
 
 module.exports = {
@@ -13,14 +14,20 @@ module.exports = {
 	},
 	//if the password is correct, the ip address is added to the list of valid addresses
 	create: function(request, response){ 
-		if( request.body.passphrase == "supersqu33k" ){
-			if( valid_ips.indexOf(request.ip) < 0 ){
-				valid_ips.push(request.ip);
+		bcrypt.compare(
+			request.body.passphrase, 
+			'$2a$10$zkXcP.cfgt0XhUStAoviD.8mPZ7ysbAmxe6qSWuhyyP8FszVd0meK', 
+			function(err, res){
+				if( res == true ){
+					if( valid_ips.indexOf(request.ip) < 0 ){
+						valid_ips.push(request.ip);
+					}
+					response.redirect('/');
+				}else{
+					response.render('login', {'errors':true});
+				}
 			}
-			response.redirect('/');
-		}else{
-			response.render('login', {'errors':true});
-		}
+		);
 	},
 	//removes an ip from the valid ip array
 	destory: function(request, response){
