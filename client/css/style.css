@@ -36,6 +36,8 @@ canvas { cursor: crosshair; }
 
 #erase-button{ display: inline-block; vertical-align:top; padding: 2px; background-color: transparent; }
 
+#image-upload input { display: none; }
+
 #state-buttons{ }
 #state-buttons .btn { margin: 1px 0; }
 

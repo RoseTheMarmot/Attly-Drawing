@@ -63,6 +63,18 @@ $(document).ready(function($){
         canvas.ctx.strokeStyle = curColor;
         socket.emit("brush_change", {brush: curColor });
       });
+    $('#image-upload').
+      on('click', 'button', function(){
+        $('#image-upload input[type=file]').trigger('click');
+        return false;
+      }).
+      on('change', 'input[type=file]', function(){
+        $('#image-upload').submit();
+      }).
+      on('submit', function(){
+        console.log($('#image-upload input[type=file]').val());
+        return false;
+      });
     $('#save-button').
       on('click', function(){
         save.saving();
