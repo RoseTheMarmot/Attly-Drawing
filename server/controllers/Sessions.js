@@ -13,7 +13,7 @@ module.exports = {
 	},
 	//if the password is correct, the ip address is added to the list of valid addresses
 	create: function(request, response){ 
-		if( request.body.passphrase == "supergeek" ){
+		if( request.body.passphrase == "superg33k" ){
 			if( valid_ips.indexOf(request.ip) < 0 ){
 				valid_ips.push(request.ip);
 			}
